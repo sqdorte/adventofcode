@@ -6,9 +6,10 @@ input = $stdin.read().split("\n").map {
   }
 }
 
-points = [[[0,0]]]
+points = []
 
 input.each do |path|
+  points << [[0,0]]
   path.each do |step|
     pos = points[-1][-1]
     dir = step[0]
@@ -16,7 +17,6 @@ input.each do |path|
 
     points[-1] += (1..dist).map { |n| [ pos[0] + dir[0] * n, pos[1] + dir[1] * n ] }
   end
-  points += [[0,0]]
 end
 
-p (points[0] & points[1]).map{ |x| x[0].abs + x[1].abs }.min
+p (points[0] & points[1] - [[0,0]]).map{ |x| x[0].abs + x[1].abs }.min
